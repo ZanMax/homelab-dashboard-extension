@@ -6,3 +6,6 @@ a:link, a:visited {
 a:hover, a:active {
     color: green;
 }
+.new-project-button {
+    padding: 10px;
+}
