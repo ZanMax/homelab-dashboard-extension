@@ -1,12 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("Loaded");
-    document.getElementById("rawConfig").value = localStorage.getItem("HomeLabSettings");
+    let localSettings = localStorage.getItem("HomeLabSettings");
+    if (localSettings) {
+        console.log("000");
+        let projectSettings = JSON.parse(localSettings);
+        for (let i = 0; i < projectSettings.length; i++) {
+            console.log("111");
+            console.log(projectSettings[i]);
+        }
+    } else {
+        console.log("No settings found");
+    }
 });
 
-document.getElementById('save-settings').addEventListener('click', saveSettings);
-
-
-function saveSettings() {
-    let settings = document.getElementById("rawConfig").value;
-    localStorage.setItem("HomeLabSettings", settings);
-}
