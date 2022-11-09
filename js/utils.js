@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         '            </svg>\n' +
                         '            <div>\n' +
                         '                <h4 class="fw-bold mb-0"><a href="' + projectData['urls'][url]['url'] + '" target="_blank">'+ projectData['urls'][url]['name'] +'</a></h4>\n' +
-                        '                <p>Ad Blocker</p>\n' +
+                        '                <p>'+ projectData['urls'][url]['description'] +'</p>\n' +
                         '            </div>\n' +
                         '        </div>';
                 }
