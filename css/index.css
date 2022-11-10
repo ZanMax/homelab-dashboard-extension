@@ -9,3 +9,6 @@ a:hover, a:active {
 .new-project-button {
     padding: 10px;
 }
+.search{
+    width: 25rem;
+}
