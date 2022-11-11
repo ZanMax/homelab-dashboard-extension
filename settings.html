@@ -51,11 +51,13 @@
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <div class="row">
                 <div class="col-sm-4 new-project-button">
-                    <button type="button" class="btn btn-primary">New project</button>
+                    <button type="button" class="btn btn-primary" id="new-project" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">New project
+                    </button>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-12">
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingOne">
@@ -70,42 +72,38 @@
                                  data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
                                     <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="mb-3">
-                                                <label for="sitename" class="form-label">
-                                                    Name
-                                                </label>
-                                                <input type="text" class="form-control" id="sitename"
-                                                       placeholder="Jenkins">
-                                            </div>
-                                        </div>
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">URL</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-warning btn-sm"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#editUrl">Edit
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="mb-3">
-                                                <label for="siteurl" class="form-label">
-                                                    Url
-                                                </label>
-                                                <input type="text" class="form-control" id="siteurl"
-                                                       placeholder="http://jenkins.local">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="mb-3">
-                                                <label for="sitdescription" class="form-label">
-                                                    Description
-                                                </label>
-                                                <input type="text" class="form-control" id="sitdescription"
-                                                       placeholder="CI / CD">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <button type="button" class="btn btn-success">Add</button>
-                                        </div>
+                                        <button type="button" class="btn btn-success" id="add-new-url"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#addNewUrl">Add URL
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -126,6 +124,127 @@
     </div>
 </div>
 
+<!-- Modal New Project-->
+<div class="modal fade" id="newProjectModal" tabindex="-1" aria-labelledby="newProjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newProjectModalLabel">New project</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" placeholder="Project name" id="project-name" name="project-name"
+                       class="form-control project-name">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="create-project">Create project</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal New URL-->
+<div class="modal fade" id="addNewUrl" tabindex="-1" aria-labelledby="addNewUrlModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addNewUrlModalLabel">New URL</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <label for="site-name" class="form-label">
+                                Name
+                            </label>
+                            <input type="text" class="form-control" id="site-name"
+                                   placeholder="Jenkins">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <label for="site-url" class="form-label">
+                                Url
+                            </label>
+                            <input type="text" class="form-control" id="site-url"
+                                   placeholder="http://jenkins.local">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <label for="site-description" class="form-label">
+                                Description
+                            </label>
+                            <input type="text" class="form-control" id="site-description"
+                                   placeholder="CI / CD">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="add-url">Add URL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit URL-->
+<div class="modal fade" id="editUrl" tabindex="-1" aria-labelledby="editUrlModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUrlModalLabel">Edit URL</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <label for="site-name" class="form-label">
+                                Name
+                            </label>
+                            <input type="text" class="form-control" id="edit-site-name"
+                                   placeholder="Jenkins">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <label for="site-url" class="form-label">
+                                Url
+                            </label>
+                            <input type="text" class="form-control" id="edit-site-url"
+                                   placeholder="http://jenkins.local">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <label for="site-description" class="form-label">
+                                Description
+                            </label>
+                            <input type="text" class="form-control" id="edit-site-description"
+                                   placeholder="CI / CD">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="edit-url">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 <script type="text/javascript" src="js/jquery.min.js"></script>
