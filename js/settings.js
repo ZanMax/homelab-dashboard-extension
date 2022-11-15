@@ -14,8 +14,11 @@ function saveSettings() {
 
 function createProject() {
     let projectName = document.getElementById("project-name").value;
-    console.log(projectName);
     document.getElementById('project-list').innerHTML += '<li>' + projectName + '</li>';
+    let addUrlModal = document.getElementById('newProjectModal');
+    let modal = bootstrap.Modal.getInstance(addUrlModal)
+    modal.hide();
+    document.getElementById("project-name").value = "";
 }
 
 document.getElementById('create-project').addEventListener('click', createProject);
