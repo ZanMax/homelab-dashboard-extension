@@ -14,7 +14,44 @@ function saveSettings() {
 
 function createProject() {
     let projectName = document.getElementById("project-name").value;
-    document.getElementById('project-list').innerHTML += '<li>' + projectName + '</li>';
+    document.getElementById('project-list').innerHTML += '<div class="accordion-item">\n' +
+        '                            <h2 class="accordion-header" id="flush-headingOne">\n' +
+        '                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"\n' +
+        '                                        data-bs-target="#flush-collapse-' + projectName + '" aria-expanded="false"\n' +
+        '                                        aria-controls="flush-collapse-' + projectName + '">\n' +
+        '                                    ' + projectName + '\n' +
+        '                                </button>\n' +
+        '                            </h2>\n' +
+        '                            <div id="flush-collapse-' + projectName + '" class="accordion-collapse collapse"\n' +
+        '                                 aria-labelledby="flush-collapse-' + projectName + '"\n' +
+        '                                 data-bs-parent="#accordionFlushExample">\n' +
+        '                                <div class="accordion-body">\n' +
+        '                                    <div class="row">\n' +
+        '                                        <table class="table">\n' +
+        '                                            <thead>\n' +
+        '                                            <tr>\n' +
+        '                                                <th scope="col">#</th>\n' +
+        '                                                <th scope="col">Name</th>\n' +
+        '                                                <th scope="col">URL</th>\n' +
+        '                                                <th scope="col">Description</th>\n' +
+        '                                                <th scope="col">Action</th>\n' +
+        '                                            </tr>\n' +
+        '                                            </thead>\n' +
+        '                                            <tbody id="urls-list">\n' +
+        '                                            </tbody>\n' +
+        '                                        </table>\n' +
+        '                                    </div>\n' +
+        '                                    <div class="row">\n' +
+        '                                        <div class="d-grid gap-2 d-md-block">\n' +
+        '                                            <button type="button" class="btn btn-success" id="add-new-url"\n' +
+        '                                                    data-bs-toggle="modal"\n' +
+        '                                                    data-bs-target="#addNewUrl">Add URL\n' +
+        '                                            </button>\n' +
+        '                                        </div>\n' +
+        '                                    </div>\n' +
+        '                                </div>\n' +
+        '                            </div>\n' +
+        '                        </div>'
     let addUrlModal = document.getElementById('newProjectModal');
     let modal = bootstrap.Modal.getInstance(addUrlModal)
     modal.hide();
