@@ -14,6 +14,33 @@ function saveSettings() {
 
 function createProject() {
     let projectName = document.getElementById("project-name").value;
+    projectHtmlInsert(projectName);
+    let addUrlModal = document.getElementById('newProjectModal');
+    let modal = bootstrap.Modal.getInstance(addUrlModal)
+    modal.hide();
+    document.getElementById("project-name").value = "";
+}
+
+document.getElementById('create-project').addEventListener('click', createProject);
+
+function addNewUrl() {
+    let name = document.getElementById("site-name").value;
+    let url = document.getElementById("site-url").value;
+    let description = document.getElementById("site-description").value;
+
+    urlHtmlInsert(name, url, description);
+
+    let addUrlModal = document.getElementById('addNewUrl');
+    let modal = bootstrap.Modal.getInstance(addUrlModal)
+    modal.hide();
+    document.getElementById("site-name").value = "";
+    document.getElementById("site-url").value = "";
+    document.getElementById("site-description").value = "";
+}
+
+document.getElementById('add-url').addEventListener('click', addNewUrl);
+
+function projectHtmlInsert(projectName) {
     document.getElementById('project-list').innerHTML += '<div class="accordion-item">\n' +
         '                            <h2 class="accordion-header" id="flush-headingOne">\n' +
         '                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"\n' +
@@ -52,22 +79,12 @@ function createProject() {
         '                                </div>\n' +
         '                            </div>\n' +
         '                        </div>'
-    let addUrlModal = document.getElementById('newProjectModal');
-    let modal = bootstrap.Modal.getInstance(addUrlModal)
-    modal.hide();
-    document.getElementById("project-name").value = "";
 }
 
-document.getElementById('create-project').addEventListener('click', createProject);
-
-function addNewUrl() {
-    let name = document.getElementById("site-name").value;
-    let url = document.getElementById("site-url").value;
-    let description = document.getElementById("site-description").value;
-
+function urlHtmlInsert(name, url, description) {
     document.getElementById('urls-list').innerHTML += '' +
         '                                            <tr>\n' +
-        '                                                <th scope="row">1</th>\n' +
+        '                                                <th scope="row"></th>\n' +
         '                                                <td>' + name + '</td>\n' +
         '                                                <td>' + url + '</td>\n' +
         '                                                <td>' + description + '</td>\n' +
@@ -79,13 +96,20 @@ function addNewUrl() {
         '                                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>\n' +
         '                                                </td>\n' +
         '                                            </tr>';
-
-    let addUrlModal = document.getElementById('addNewUrl');
-    let modal = bootstrap.Modal.getInstance(addUrlModal)
-    modal.hide();
-    document.getElementById("site-name").value = "";
-    document.getElementById("site-url").value = "";
-    document.getElementById("site-description").value = "";
 }
 
-document.getElementById('add-url').addEventListener('click', addNewUrl);
+function createProjectFromJSON() {
+
+}
+
+function createUrlFromJSON() {
+
+}
+
+function addProjectToJSON() {
+
+}
+
+function addUrlToJSON() {
+
+}
