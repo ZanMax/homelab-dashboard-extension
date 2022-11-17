@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let localSettings = localStorage.getItem("HomeLabSettings");
-    if (localSettings) {
-        document.getElementById("rawConfig").value = localSettings;
-    }
+    document.getElementById("rawConfig").value = checkConfigExist();
+    createProjectFromJSON();
 });
 
 document.getElementById('save-settings').addEventListener('click', saveSettings);
@@ -64,7 +62,7 @@ function projectHtmlInsert(projectName) {
         '                                                <th scope="col">Action</th>\n' +
         '                                            </tr>\n' +
         '                                            </thead>\n' +
-        '                                            <tbody id="urls-list">\n' +
+        '                                            <tbody id="urls-list-' + projectName + '">\n' +
         '                                            </tbody>\n' +
         '                                        </table>\n' +
         '                                    </div>\n' +
@@ -72,7 +70,7 @@ function projectHtmlInsert(projectName) {
         '                                        <div class="d-grid gap-2 d-md-block">\n' +
         '                                            <button type="button" class="btn btn-success" id="add-new-url"\n' +
         '                                                    data-bs-toggle="modal"\n' +
-        '                                                    data-bs-target="#addNewUrl">Add URL\n' +
+        '                                                    data-bs-target="#addNewUrl" disabled>Add URL\n' +
         '                                            </button>\n' +
         '                                        </div>\n' +
         '                                    </div>\n' +
@@ -81,25 +79,51 @@ function projectHtmlInsert(projectName) {
         '                        </div>'
 }
 
-function urlHtmlInsert(name, url, description) {
-    document.getElementById('urls-list').innerHTML += '' +
+function urlHtmlInsert(project, name, url, description) {
+    document.getElementById('urls-list-' + project).innerHTML += '' +
         '                                            <tr>\n' +
         '                                                <th scope="row"></th>\n' +
         '                                                <td>' + name + '</td>\n' +
         '                                                <td>' + url + '</td>\n' +
         '                                                <td>' + description + '</td>\n' +
         '                                                <td>\n' +
-        '                                                    <button type="button" class="btn btn-warning btn-sm"\n' +
+        '                                                    <button type="button" class="btn btn-warning btn-sm add-new-url"\n' +
         '                                                            data-bs-toggle="modal"\n' +
-        '                                                            data-bs-target="#editUrl">Edit\n' +
+        '                                                            data-bs-target="#editUrl" disabled>Edit\n' +
         '                                                    </button>\n' +
-        '                                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>\n' +
+        '                                                    <button type="button" class="btn btn-danger btn-sm" disabled>Delete</button>\n' +
         '                                                </td>\n' +
         '                                            </tr>';
 }
 
-function createProjectFromJSON() {
+function checkConfigExist() {
+    let localSettings = localStorage.getItem("HomeLabSettings");
+    if (localSettings) {
+        return localSettings;
+    } else {
+        console.log("No settings found");
+        return "";
+    }
+}
 
+function deleteSpacesFromProjectName(projectName) {
+    return projectName.replace(/\s/g, '');
+}
+
+function createProjectFromJSON() {
+    let configJSON = checkConfigExist();
+    if (configJSON === "") {
+        console.log("No settings found");
+    } else {
+        let config = JSON.parse(configJSON);
+        for (let project of config["projects"]) {
+            console.log(project);
+            projectHtmlInsert(project["name"]);
+            for (let url of project["urls"]) {
+                urlHtmlInsert(project["name"], url["name"], url["url"], url["description"]);
+            }
+        }
+    }
 }
 
 function createUrlFromJSON() {

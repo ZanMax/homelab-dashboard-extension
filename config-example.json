@@ -1,0 +1,72 @@
+{
+  "projects":[
+    {
+      "name":"HomeLab",
+      "urls":[
+        {
+          "name":"test 1",
+          "url":"http://pi-hole.local",
+          "icon":"toggles2",
+          "description":"some description"
+        },
+        {
+          "name":"test 2",
+          "url":"http://pi-hole2.local",
+          "icon":"geo-fill",
+          "description":"some description"
+        }
+      ]
+    },
+    {
+      "name":"Dev",
+      "urls":[
+        {
+          "name":"Dev link1",
+          "url":"http://pi-hole3.local",
+          "icon":"123",
+          "description":"some description"
+        },
+        {
+          "name":"Dev link2",
+          "url":"http://pi-hole4.local",
+          "icon":"1-circle",
+          "description":"some description"
+        }
+      ]
+    },
+    {
+      "name":"Stage",
+      "urls":[
+        {
+          "name":"Stage link1",
+          "url":"http://pi-hole5.local",
+          "icon":"2-circle",
+          "description":"some description"
+        },
+        {
+          "name":"Stage link2",
+          "url":"http://pi-hole6.local",
+          "icon":"3-circle",
+          "description":"some description"
+        }
+      ]
+    },
+    {
+      "name":"Prod",
+      "urls":[
+        {
+          "name":"Prod link1",
+          "url":"http://pi-hole5.local",
+          "icon":"4-circle",
+          "description":"some description"
+        },
+        {
+          "name":"Prod link2",
+          "url":"http://pi-hole6.local",
+          "icon":"5-circle",
+          "description":"some description"
+        }
+      ]
+    }
+  ]
+}
