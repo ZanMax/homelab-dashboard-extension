@@ -3,12 +3,23 @@ a:link, a:visited {
     text-align: center;
     text-decoration: none;
 }
+
 a:hover, a:active {
     color: green;
 }
+
 .new-project-button {
     padding: 10px;
 }
-.search{
+
+.search {
     width: 25rem;
+}
+
+.aboutPage {
+    display: none;
+}
+
+.settingsPage {
+    display: none;
 }

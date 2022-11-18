@@ -18,7 +18,10 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="settings.html">Settings</a>
+                    <a class="nav-link" href="#" id="aboutPageLink">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="settingsPageLink">Settings</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Projects</a>
@@ -30,7 +33,7 @@
     </div>
 </nav>
 
-<div class="container px-4 py-5" id="icon-grid">
+<div class="container px-4 py-5" id="mainPage">
     <div class="row">
         <div class="col-sm-2 border-bottom">
             <h2 class="pb-2" id="projectName"></h2>
@@ -44,6 +47,205 @@
     </div>
 </div>
 
+<div class="container aboutPage" id="aboutPage">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="mt-5 border-bottom">HomeLab Dashboard</h1>
+            <p class="lead">
+                Extension for HomeLab. Give you a dashboard to collect all your resources in one place.
+            </p>
+            <h3 class="mt-5 border-bottom">Support project</h3>
+            <p class="lead">
+                You also can support this project by donating.
+            </p>
+            <ul>
+                <li><a href="https://patreon.com/zanmax">Support me on Patreon</a></li>
+                <li><a href="https://www.buymeacoffee.com/ZanMax">Buy Me a Coffee</a></li>
+            </ul>
+            <h3 class="mt-5 border-bottom">Other projects</h3>
+            <p class="lead">
+                You can find other projects on my <a href="https://github.com/ZanMax>" target="_blank">GitHub</a> page.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="container settingsPage" id="settingsPage">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                    role="tab" aria-controls="home" aria-selected="true">Projects
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                    role="tab" aria-controls="profile" aria-selected="false">Import / Export
+            </button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="d-grid gap-2 d-md-block new-project-button">
+                        <button type="button" class="btn btn-primary" id="new-project" data-bs-toggle="modal"
+                                data-bs-target="#newProjectModal" disabled>New project
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="accordion accordion-flush" id="project-list">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="mb-3">
+                <label for="rawConfig" class="form-label">JSON config</label>
+                <textarea class="form-control" id="rawConfig" rows="30"></textarea>
+            </div>
+            <div>
+                <button type="button" class="btn btn-success" id="save-settings">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal New Project-->
+<div class="modal fade" id="newProjectModal" tabindex="-1" aria-labelledby="newProjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newProjectModalLabel">New project</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" placeholder="Project name" id="project-name" name="project-name"
+                       class="form-control project-name">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="create-project">Create project</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal New URL-->
+<div class="modal fade" id="addNewUrl" tabindex="-1" aria-labelledby="addNewUrlModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addNewUrlModalLabel">New URL</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <label for="site-name" class="form-label">
+                                Name
+                            </label>
+                            <input type="text" class="form-control" id="site-name"
+                                   placeholder="Jenkins">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <label for="site-url" class="form-label">
+                                Url
+                            </label>
+                            <input type="text" class="form-control" id="site-url"
+                                   placeholder="http://jenkins.local">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <label for="site-url" class="form-label">
+                                Icon
+                            </label>
+                            <input type="text" class="form-control" id="site-icon"
+                                   placeholder="Bootsrap icon">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <label for="site-description" class="form-label">
+                                Description
+                            </label>
+                            <input type="text" class="form-control" id="site-description"
+                                   placeholder="CI / CD">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="add-url">Add URL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit URL-->
+<div class="modal fade" id="editUrl" tabindex="-1" aria-labelledby="editUrlModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUrlModalLabel">Edit URL</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <label for="site-name" class="form-label">
+                                Name
+                            </label>
+                            <input type="text" class="form-control" id="edit-site-name"
+                                   placeholder="Jenkins">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <label for="site-url" class="form-label">
+                                Url
+                            </label>
+                            <input type="text" class="form-control" id="edit-site-url"
+                                   placeholder="http://jenkins.local">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mb-3">
+                            <label for="site-description" class="form-label">
+                                Description
+                            </label>
+                            <input type="text" class="form-control" id="edit-site-description"
+                                   placeholder="CI / CD">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="edit-url">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 <script type="text/javascript" src="js/jquery.min.js"></script>
