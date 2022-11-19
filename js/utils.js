@@ -30,6 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     } else {
         console.log("No settings found");
+        settingsPageLink();
+        document.getElementById("profile-tab").click();
     }
 
     document.getElementById("rawConfig").value = checkConfigExist();
