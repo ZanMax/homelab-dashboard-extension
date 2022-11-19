@@ -92,6 +92,12 @@ document.getElementById('save-settings').addEventListener('click', saveSettings)
 function saveSettings() {
     let settings = document.getElementById("rawConfig").value;
     localStorage.setItem("HomeLabSettings", settings);
+
+    let localSettings = localStorage.getItem("HomeLabSettings");
+    let projectSettings = JSON.parse(localSettings);
+    let defaultProject = projectSettings["projects"][0]["name"];
+    setProject(defaultProject);
+    window.location.reload();
 }
 
 function createProject() {
