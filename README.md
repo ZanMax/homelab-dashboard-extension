@@ -15,6 +15,23 @@ After installation just past config in import/export section.
 You can find the icons in the [Bootstrap Icons](https://icons.getbootstrap.com/).
 You can add your own icons and use them in the config.
 
+#### Use in Safari:
+Run the following command in the terminal:
+```bash
+xcrun safari-web-extension-converter path/to/extension
+```
+Open xcode and build the project.
+
+Go to Safari -> Preferences -> Advanced
+Activate: Show develop menu in menu bar
+
+Go to Develop and activate "Allow unsigned extensions"
+
+#### Use in Firefox:
+
+You need update the manifest.json.
+You can find example of manifest file in firefox folder.
+
 ## Support project
 
 If you like this project, you can support it by donating.
