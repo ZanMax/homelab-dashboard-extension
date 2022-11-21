@@ -10,12 +10,14 @@ document.addEventListener("DOMContentLoaded", function () {
             if (projectData["name"] === CurrentProject) {
                 for (let url in projectData['urls']) {
                     document.getElementById('main-container').innerHTML += '<div class="project-link"><div class="col d-flex align-items-start">\n' +
+                        '<a href="' + projectData['urls'][url]['url'] + '" target="_blank">\n' +
                         '            <svg class="bi text-muted flex-shrink-0 me-3" width="2.75em" height="2.75em">\n' +
                         '                <use xlink:href="img/bootstrap-icons.svg#' + projectData['urls'][url]['icon'] + '"></use>\n' +
                         '            </svg>\n' +
+                        '        </a>\n' +
                         '            <div>\n' +
                         '                <h4 class="fw-bold mb-0"><a href="' + projectData['urls'][url]['url'] + '" target="_blank">' + projectData['urls'][url]['name'] + '</a></h4>\n' +
-                        '                <p>' + projectData['urls'][url]['description'] + '</p>\n' +
+                        '                <p class="description">' + projectData['urls'][url]['description'] + '</p>\n' +
                         '            </div>\n' +
                         '        </div></div>';
                 }
@@ -50,15 +52,20 @@ search.addEventListener('input', inputHandler);
 
 function inputHandler() {
     let searchValue = search.value.toLowerCase();
-    let projects = document.getElementsByClassName('project-link');
-    Array.from(projects).forEach(function (element) {
-        let projectName = element.getElementsByTagName('h4')[0].innerText.toLowerCase();
-        if (projectName.includes(searchValue)) {
-            element.style.display = 'flex';
-        } else {
-            element.style.display = 'none';
-        }
-    })
+    let checkGlobal = searchValue.slice(-2);
+    if (checkGlobal === "/g") {
+        console.log("Global search");
+    } else {
+        let projects = document.getElementsByClassName('project-link');
+        Array.from(projects).forEach(function (element) {
+            let projectName = element.getElementsByTagName('h4')[0].innerText.toLowerCase();
+            if (projectName.includes(searchValue)) {
+                element.style.display = 'flex';
+            } else {
+                element.style.display = 'none';
+            }
+        })
+    }
 }
 
 document.getElementById('dashboard-link').addEventListener('click', historyBack);
