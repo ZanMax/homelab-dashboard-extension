@@ -9,17 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('projectsMenu').innerHTML += '<li><a class="dropdown-item" href="#">' + projectData["name"] + '</a></li>';
             if (projectData["name"] === CurrentProject) {
                 for (let url in projectData['urls']) {
-                    document.getElementById('main-container').innerHTML += '<div class="project-link"><div class="col d-flex align-items-start">\n' +
-                        '<a href="' + projectData['urls'][url]['url'] + '" target="_blank">\n' +
-                        '            <svg class="bi text-muted flex-shrink-0 me-3" width="2.75em" height="2.75em">\n' +
-                        '                <use xlink:href="img/bootstrap-icons.svg#' + projectData['urls'][url]['icon'] + '"></use>\n' +
-                        '            </svg>\n' +
-                        '        </a>\n' +
-                        '            <div>\n' +
-                        '                <h4 class="fw-bold mb-0"><a href="' + projectData['urls'][url]['url'] + '" target="_blank">' + projectData['urls'][url]['name'] + '</a></h4>\n' +
-                        '                <p class="description">' + projectData['urls'][url]['description'] + '</p>\n' +
-                        '            </div>\n' +
-                        '        </div></div>';
+                    insertURLtoDashboard(projectData, url);
                 }
             }
         }
@@ -50,21 +40,58 @@ const search = document.getElementById('search');
 
 search.addEventListener('input', inputHandler);
 
+function clearURLS() {
+    document.getElementById('main-container').innerHTML = "";
+}
+
+function getALlUrls() {
+    let localSettings = localStorage.getItem("HomeLabSettings");
+    let projectSettings = JSON.parse(localSettings);
+    for (let project in projectSettings["projects"]) {
+        let projectData = projectSettings["projects"][project];
+        for (let url in projectData['urls']) {
+            insertURLtoDashboard(projectData, url);
+        }
+    }
+}
+
+function getAllUrlsCurrentProject() {
+    let CurrentProject = localStorage.getItem("CurrentProject");
+    let localSettings = localStorage.getItem("HomeLabSettings");
+    let projectSettings = JSON.parse(localSettings);
+    for (let project in projectSettings["projects"]) {
+        let projectData = projectSettings["projects"][project];
+        if (projectData["name"] === CurrentProject) {
+            for (let url in projectData['urls']) {
+                insertURLtoDashboard(projectData, url);
+            }
+        }
+    }
+}
+
+function searchLink(searchValue) {
+    let projects = document.getElementsByClassName('project-link');
+    Array.from(projects).forEach(function (element) {
+        let projectName = element.getElementsByTagName('h4')[0].innerText.toLowerCase();
+        if (projectName.includes(searchValue)) {
+            element.style.display = 'flex';
+        } else {
+            element.style.display = 'none';
+        }
+    })
+}
+
 function inputHandler() {
     let searchValue = search.value.toLowerCase();
     let checkGlobal = searchValue.slice(-2);
     if (checkGlobal === "/g") {
-        console.log("Global search");
+        clearURLS();
+        getALlUrls();
+        searchLink(searchValue.replace("/g", ""));
     } else {
-        let projects = document.getElementsByClassName('project-link');
-        Array.from(projects).forEach(function (element) {
-            let projectName = element.getElementsByTagName('h4')[0].innerText.toLowerCase();
-            if (projectName.includes(searchValue)) {
-                element.style.display = 'flex';
-            } else {
-                element.style.display = 'none';
-            }
-        })
+        clearURLS();
+        getAllUrlsCurrentProject();
+        searchLink(searchValue);
     }
 }
 
@@ -134,6 +161,20 @@ function addNewUrl() {
 }
 
 document.getElementById('add-url').addEventListener('click', addNewUrl);
+
+function insertURLtoDashboard(projectData, url) {
+    document.getElementById('main-container').innerHTML += '<div class="project-link"><div class="col d-flex align-items-start">\n' +
+        '<a href="' + projectData['urls'][url]['url'] + '" target="_blank">\n' +
+        '            <svg class="bi text-muted flex-shrink-0 me-3" width="2.75em" height="2.75em">\n' +
+        '                <use xlink:href="img/bootstrap-icons.svg#' + projectData['urls'][url]['icon'] + '"></use>\n' +
+        '            </svg>\n' +
+        '        </a>\n' +
+        '            <div>\n' +
+        '                <h4 class="fw-bold mb-0"><a href="' + projectData['urls'][url]['url'] + '" target="_blank">' + projectData['urls'][url]['name'] + '</a></h4>\n' +
+        '                <p class="description">' + projectData['urls'][url]['description'] + '</p>\n' +
+        '            </div>\n' +
+        '        </div></div>';
+}
 
 function projectHtmlInsert(projectName) {
     document.getElementById('project-list').innerHTML += '<div class="accordion-item">\n' +
