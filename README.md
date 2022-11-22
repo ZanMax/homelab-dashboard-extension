@@ -3,6 +3,8 @@
 Extension for homelab. Give you a dashboard to collect all your resources in one place. All provide creating projects
 and group them.
 
+![](img/homelab-dashboard.png)
+
 ### Configuration
 
 You can find the configuration example in the `config-example.json` file.
