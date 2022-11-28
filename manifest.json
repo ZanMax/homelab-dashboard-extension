@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "version": "1.0",
-  "name": "HomeLab",
-  "description": "HomeLab Dashboard Extension",
+  "name": "HomeLab Dashboard",
+  "description": "HomeLab Dashboard",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
@@ -12,9 +12,6 @@
   "action": {
     "default_popup": "popup.html",
     "default_icon": "img/logo.png"
-  },
-  "background": {
-    "service_worker": "js/background.js"
   },
   "icons": {
     "16": "img/icons/icon16.png",
