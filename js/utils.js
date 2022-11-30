@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    firstRun();
     let CurrentProject = localStorage.getItem("CurrentProject");
     document.getElementById('projectName').innerHTML = CurrentProject;
     let localSettings = localStorage.getItem("HomeLabSettings");
@@ -273,4 +274,19 @@ function addProjectToJSON() {
 
 function addUrlToJSON() {
 
+}
+
+function firstRun() {
+    let jsonConfigExample = '{"projects": [{"name": "Project 1", "urls": [{"name": "URL 1", "url": "https://example.com", "description": "Example URL", "icon": "github"}]}, {"name": "Project 2", "urls": [{"name": "URL 1", "url": "https://example.com", "description": "Example URL", "icon": "github"}]}]}';
+    let firstRun = localStorage.getItem("HomeLabFirstRun");
+    if (!firstRun) {
+        localStorage.setItem("HomeLabFirstRun", 1);
+        localStorage.setItem("HomeLabSettings", jsonConfigExample);
+
+        let localSettings = localStorage.getItem("HomeLabSettings");
+        let projectSettings = JSON.parse(localSettings);
+        let defaultProject = projectSettings["projects"][0]["name"];
+        setProject(defaultProject);
+        window.location.reload();
+    }
 }
