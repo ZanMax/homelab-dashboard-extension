@@ -1,14 +1,11 @@
 {
   "manifest_version": 3,
-  "version": "1.0",
+  "version": "1.2",
   "name": "HomeLab Dashboard",
-  "description": "HomeLab Dashboard",
+  "description": "This extension allows you to create a dashboard with links for your sites and services.",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
-  "permissions": [
-    "storage"
-  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": "img/logo.png"
